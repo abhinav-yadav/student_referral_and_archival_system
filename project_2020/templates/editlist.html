@@ -1,0 +1,54 @@
+{% extends 'settings-base.html' %}
+{% block settings-content %}
+<div class="container table list">
+  {% if articles|length > 0 %}
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Published</th>
+        <th scope="col">operations</th>
+      </tr>
+    </thead>
+    {% for article in articles %}
+    <tbody>
+      <tr>
+        {% if article.title|length > 30 %}
+        <td>{{article.title|slice:":30"|add:' ...'}}</td>
+        {% else %}
+        <td>{{article.title}}</td>
+        {% endif %}
+        <td>{{article.publish}}</td>
+        <td>@mdo</td>
+      </tr>
+    </tbody>
+    {% endfor %}
+  </table>
+  {% else %}
+  <h1>Empty Keep Adding Projects</h1>
+  {% endif %}
+</div>
+{% if articles.paginator.num_pages > 1 %}
+<nav aria-label="Page navigation example">
+  <ul class="pagination pagination-sm justify-content-center">
+    {% if articles.has_previous %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ articles.previous_page_number }}" tabindex="-1"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></a>
+    </li>
+    {% endif %}
+    {% for num in articles.paginator.page_range %}
+    {% if articles.number == num %}
+    <li class="page-item active"><a class="page-link" href="#">{{ num }}</a></li>
+    {% elif num > articles.number|add:'-3' and num < articles.number|add:'3' %}
+    <li class="page-item"><a class="page-link" href="?page={{ num }}">{{num }}</a></li>
+    {% endif %}
+    {% endfor %}
+    {% if articles.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ articles.next_page_number }}"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}
+{% endblock %}

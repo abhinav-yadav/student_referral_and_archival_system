@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>intrigue</title>
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
+    <link rel="stylesheet" href="{% static 'assets/fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/fonts/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Article-Cards.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Pretty-Header.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Swiper-Slider-Card-For-Blog-Or-Product-1.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Swiper-Slider-Card-For-Blog-Or-Product.css' %}">
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-md custom-header">
+        <div class="container-fluid">
+            <div><a class="navbar-brand" href="#">Intrigue</a></div><button data-toggle="collapse" class="navbar-toggler" data-target="#navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse"
+                id="navbar-collapse">
+                <ul class="nav navbar-nav links">
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Overview </a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Surveys </a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#"> Reports</a></li>
+                    <li class="nav-item" role="presentation"></li>
+                </ul>
+                <form class="form-inline mr-auto" target="_self">
+                    <div class="form-group"><label for="search-field"><i class="fa fa-search"></i></label><input class="form-control search-field" type="search" id="search-field" name="search"></div>
+                </form>
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"> <img class="dropdown-image" src="assets/img/avatar.jpg"></a>
+                        <div class="dropdown-menu dropdown-menu-right" role="menu"><a class="dropdown-item" role="presentation" href="#">Settings </a><a class="dropdown-item" role="presentation" href="#">Payments </a><a class="dropdown-item" role="presentation" href="#">Logout </a></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="blog-slider">
+        <div class="blog-slider__wrp swiper-wrapper">
+          {% for article in articles %}
+            <div class="blog-slider__item swiper-slide">
+                <div></div>
+                <div class="blog-slider__img"><img src="{{ article.image.url }}"></div>
+                <div class="blog-slider__content">
+                  <span class="blog-slider__code">{{ article.timestamp|date:"d F Y"}}</span>
+                  <div class="blog-slider__title">{{ article.title }}</div>
+                  <div class="blog-slider__text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae voluptate repellendus magni illo ea animi? </div>
+                  <a class="class=&quot;blog-slider__button" href="{% url 'articles:detail' slug=article.slug %}">READ MORE</a>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="blog-slider__pagination"></div>
+        </div>
+    </div>
+    <br>
+
+    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/Swiper-Slider-Card-For-Blog-Or-Product.js' %}"></script>
+</body>
+
+</html>
